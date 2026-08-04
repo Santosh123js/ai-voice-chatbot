@@ -38,7 +38,7 @@ app.post("/chat", (req, res) => {
   res.json({
     success: true,
     message: "Message received successfully!",
-    userMessage: req.body,
+    data: req.body,
   });
 });
 
