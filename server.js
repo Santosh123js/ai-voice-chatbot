@@ -2,17 +2,18 @@ const express = require("express");
 
 const app = express();
 
+const chatRoutes = require("./routes/chatRoutes");
+
 const PORT = 3000;
 
+// Middleware
 app.use(express.json());
-
 app.use(express.static("public"));
 
+// Routes
 app.get("/", (req, res) => {
   res.send("Hello Santosh! 🚀 AI Voice Chatbot Server is Running.");
 });
-
-
 
 app.get("/about", (req, res) => {
   res.send("This is an AI Voice Chatbot built using Node.js and Express.");
@@ -26,23 +27,10 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Chat Routes
+app.use("/chat", chatRoutes);
 
-
-
-
-// app.use(express.json());
-
-app.post("/chat", (req, res) => {
-  console.log(req.body);
-
-  res.json({
-    success: true,
-    message: "Message received successfully!",
-    data: req.body,
-  });
-});
-
-
+// Start Server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
