@@ -3,34 +3,30 @@ const messageInput = document.getElementById("message");
 const output = document.getElementById("output");
 
 sendBtn.addEventListener("click", async () => {
+  const message = messageInput.value;
 
-    const message = messageInput.value;
+  if (message.trim() === "") {
+    alert("Please enter a message");
+    return;
+  }
 
-    if (message.trim() === "") {
-        alert("Please enter a message");
-        return;
-    }
+  const response = await fetch("/chat", {
+    method: "POST",
 
-    const response = await fetch("/chat", {
+    headers: {
+      "Content-Type": "application/json",
+    },
 
-        method: "POST",
+    body: JSON.stringify({
+      message: message,
+    }),
+  });
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+  const data = await response.json();
 
-        body: JSON.stringify({
-            message: message
-        })
-
-    });
-
-    const data = await response.json();
-
-    output.innerHTML = `
+  output.innerHTML = `
         <h3>Server Response</h3>
         <p>${data.message}</p>
         <p><strong>You Sent:</strong> ${data.data.message}</p>
     `;
-
 });
