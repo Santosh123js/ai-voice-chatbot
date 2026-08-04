@@ -4,6 +4,10 @@ const app = express();
 
 const PORT = 3000;
 
+app.use(express.json());
+
+app.use(express.static("public"));
+
 app.get("/", (req, res) => {
   res.send("Hello Santosh! 🚀 AI Voice Chatbot Server is Running.");
 });
@@ -22,6 +26,21 @@ app.get("/health", (req, res) => {
   });
 });
 
+
+
+
+
+// app.use(express.json());
+
+app.post("/chat", (req, res) => {
+  console.log(req.body);
+
+  res.json({
+    success: true,
+    message: "Message received successfully!",
+    userMessage: req.body,
+  });
+});
 
 
 app.listen(PORT, () => {
