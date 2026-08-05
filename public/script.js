@@ -25,8 +25,7 @@ sendBtn.addEventListener("click", async () => {
   const data = await response.json();
 
   output.innerHTML = `
-        <h3>Server Response</h3>
-        <p>${data.message}</p>
-        <p><strong>You Sent:</strong> ${data.data.message}</p>
-    `;
+<h3>AI Reply</h3>
+<p>${data.reply}</p>
+`;
 });
